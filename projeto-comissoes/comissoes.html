@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/98.css"
+    >
+</head>
+<style>
+    .button-submit {
+        margin-top: 1rem;
+    }
+    .valores-e-comissoes-linha {
+      display: grid;
+      grid-template-columns: 150px 150px;
+      gap: 1rem;
+    }
+</style>
+  <body>
+    <h1>Caixa registradora</h1>
+
+    
+      <fieldset>
+        <label for="valor">Insira aqui o valor:</label>
+        <input name="valor" data-id="valor" id="valor" type="number" />
+      </fieldset>
+
+      <button class="button-submit" onclick="adicionarComissao()" type="submit">Adicionar valor</button>
+      
+      <p>Ultima comissão: <strong data-id="ultima-comissao"></strong></p>
+
+      <hr>
+      <article class="valores-e-comissoes-linha">
+        <section>
+          <p>Valores:</p>
+          <ul data-id="comissoes">
+          </ul>
+        </section>
+        
+        <section>
+          <p>Comissões:</p>
+          <ul data-id="comissoes">
+          </ul>
+        </section>
+      </article>
+    <script>
+      const valores = [];
+      
+      function adicionarComissao() {
+        const valorAtual = document.querySelector('[data-id="valor"]').value;
+        valores.unshift(valorAtual);
+        mostrarValores();
+        // TODO: sempre que clicar no botão, adicionar o valor aos valores
+        calcularComissao(valorAtual);
+        console.log(valores)
+    }
+
+    function calcularComissao(valorAtual) {
+        // TODO: deve trocar o valor da ultima comissão para 20% do ultimo valor atual
+        const ultimaComissao = document.querySelector('[data-id="ultima-comissao"]');
+        const porcentagem = 20;
+        ultimaComissao.textContent = (valorAtual * porcentagem) / 100;
+    }
+
+    function mostrarValores() {
+      // TODO: sempre que adicionar um valor, deve adicionar na lista de valores do html
+      const comissoes = document.querySelector('[data-id="comissoes"]') ;
+      comissoes.innerHTML = "";
+      valores.forEach((valor) => {
+        const listItem = document.createElement('li');
+        listItem.textContent = "R$ " + valor
+        comissoes.appendChild(listItem);
+      })
+    }
+
+    function mostrarComissoes() {
+      // TODO: sempre que adicionar uma comissão, deve adicionar na lista de comissões do html
+    }
+    </script>
+  </body>
+</html>
